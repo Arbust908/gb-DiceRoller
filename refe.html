@@ -1,0 +1,373 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dice Roller</title>
+  <script defer src="https://pro.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-4Gm0M5DjJ0zGaEtLu0ztNIoHWiuJ5rKiaVlpZKeNqXAW49eIIa2ymxb3C4c3uEXR" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=IM+Fell+English|Roboto+Slab" rel="stylesheet">
+  <style>
+    body{
+      font-family: 'Roboto Slab', serif;
+      margin: 0;
+    }
+    h1,h2,h3,h4,h5,h6{
+      font-family: 'IM Fell English', serif;
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <section>
+      <h3>referencia</h3>
+      <article>
+        <h6>Minimo</h6>
+        <i class="fas fa-angle-double-down"></i>
+        <i class="fas fa-angle-double-left"></i>
+      </article>
+      <article>
+        <h6>Maximo</h6>
+        <i class="fas fa-angle-double-right"></i>
+        <i class="fas fa-angle-double-up"></i>
+      </article>
+      <article>
+        <h6>menos</h6>
+        <i class="fas fa-angle-down"></i>
+        <i class="fas fa-angle-left"></i>
+      </article>
+      <article>
+        <h6>mas</h6>
+        <i class="fas fa-angle-right"></i>
+        <i class="fas fa-angle-up"></i>
+      </article>
+      <article>
+        <h6>HandAxe</h6>
+        <i class="fas fa-axe"></i>
+      </article>
+      <article>
+        <h6>Battle Axe</h6>
+        <i class="fas fa-axe-battle"></i>
+      </article>
+      <article>
+        <h6>Arco</h6>
+        <i class="fas fa-bow-arrow"></i>
+      </article>
+      <article>
+        <h6>Puño</h6>
+        <i class="fas fa-boxing-glove"></i>
+      </article>
+      <article>
+        La sopa
+        <i class="fas fa-cauldron"></i>
+      </article>
+      <article>
+        <h6>Estadisticas</h6>
+        <i class="fas fa-chart-bar"></i>
+      </article>
+      <article>
+        <h6>OK</h6>
+        <i class="fas fa-check-circle"></i>
+      </article>
+      <article>
+        <h6>Garras</h6>
+        <i class="fas fa-claw-marks"></i>
+      </article>
+      <article>
+        <h6>Codigo</h6>
+        <i class="fas fa-code"></i>
+      </article>
+      <article>
+        <h6>Configuracion</h6>
+        <i class="fas fa-cog"></i>
+      </article>
+      <article>
+        <h6>Daga</h6>
+        <i class="fas fa-dagger"></i>
+      </article>
+      <article>
+        <h6>D&D</h6>
+        <i class="fab fa-d-and-d"></i>
+      </article>
+      <article>
+        <h6>Tirar Dados</h6>
+        <i class="fas fa-dice"></i>
+      </article>
+      <article>
+        <h6>D10</h6>
+        <i class="far fa-dice-d10"></i>
+      </article>
+      <article>
+        <h6>D12</h6>
+        <i class="far fa-dice-d12"></i>
+      </article>
+      <article>
+        <h6>D20</h6>
+        <i class="far fa-dice-d20"></i>
+      </article>
+      <article>
+        <h6>D4</h6>
+        <i class="far fa-dice-d4"></i>
+      </article>
+      <article>
+        <h6>D6</h6>
+        <i class="far fa-dice-d6"></i>
+      </article>
+      <article>
+        <h6>D8</h6>
+        <i class="far fa-dice-d8"></i>
+      </article>
+      <article>
+        <h6>5 en D6</h6>
+        <i class="fas fa-dice-five"></i>
+      </article>
+      <article>
+        <h6>4 en D6</h6>
+        <i class="fas fa-dice-four"></i>
+      </article>
+      <article>
+        <h6>1 en D6</h6>
+        <i class="fas fa-dice-one"></i>
+      </article>
+      <article>
+        <h6>6 en D6</h6>
+        <i class="fas fa-dice-six"></i>
+      </article>
+      <article>
+        <h6>3 en D6</h6>
+        <i class="fas fa-dice-three"></i>
+      </article>
+      <article>
+        <h6>2 en D6</h6>
+        <i class="fas fa-dice-two"></i>
+      </article>
+      
+      <hr><hr>
+      <article>
+        <h6>Guadaña</h6>
+        <i class="fas fa-scythe"></i>
+      </article>
+      <article>
+        <h6>Escudo</h6>
+        <i class="fas fa-shield"></i>
+      </article>
+      <article>
+        <h6>Medio Escudo</h6>
+        <i class="fas fa-shield-alt"></i>
+      </article>
+      <article>
+        <h6>Escudo Santo</h6>
+        <i class="fas fa-shield-cross"></i>
+      </article>
+      <article>
+        <h6>Muelte</h6>
+        <i class="fas fa-skull-crossbones"></i>
+      </article>
+      <article>
+        <h6>Baston</h6>
+        <i class="fas fa-staff"></i>
+      </article>
+      <article>
+        <h6>Estrella</h6>
+        <i class="fas fa-star"></i>
+      </article>
+      <article>
+        <h6>Estrella Vacias</h6>
+        <i class="far fa-star"></i>
+      </article>
+      <article>
+        <h6>Medi Estrella</h6>
+        <i class="fas fa-star-half-alt"></i>
+      </article>
+      <article>
+        <h6>Espada</h6>
+        <i class="fas fa-sword"></i>
+      </article>
+      <article>
+        <h6>Espadas</h6>
+        <i class="fas fa-swords"></i>
+      </article>
+      <article>
+        <h6>Sincronizar</h6>
+        <i class="fas fa-sync"></i>
+      </article>
+      <article>
+        <h6>Cancelar</h6>
+        <i class="fas fa-times-circle"></i>
+      </article>
+      <article>
+        <h6>Off</h6>
+        <i class="far fa-toggle-off"></i>
+      </article>
+      <article>
+        <h6>On</h6>
+        <i class="far fa-toggle-on"></i>
+      </article>
+      <article>
+        <h6>Dead</h6>
+        <i class="fas fa-tombstone"></i>
+      </article>
+      <article>
+        <h6>Portal</h6>
+        <i class="fas fa-torii-gate"></i>
+      </article>
+      <article>
+        <h6>Borrar</h6>
+        <i class="fas fa-trash-alt"></i>
+      </article>
+      <article>
+        <h6>Trofeo</h6>
+        <i class="fas fa-trophy"></i>
+      </article>
+      <article>
+        <h6>Platinar</h6>
+        <i class="fas fa-trophy-alt"></i>
+      </article>
+      
+      <hr><hr>
+      <article>
+        <h6>Pollo</h6>
+        <i class="fas fa-turkey"></i>
+      </article>
+      <article>
+        <h6>Usuario</h6>
+        <i class="fas fa-user"></i>
+      </article>
+      <article>
+        <h6>Usuario Temporal</h6>
+        <i class="fas fa-user-clock"></i>
+      </article>
+      <article>
+        <h6>Usuario de Systema</h6>
+        <i class="fas fa-user-cog"></i>
+      </article>
+      <article>
+        <h6>Admin</h6>
+        <i class="fas fa-user-crown"></i>
+      </article>
+      <article>
+        <h6>Usuario Bloqueado</h6>
+        <i class="fas fa-user-lock"></i>
+      </article>
+      <article>
+        <h6>Usuario Oculto</h6>
+        <i class="fas fa-user-ninja"></i>
+      </article>
+      <article>
+        <h6>Usuario Incognito</h6>
+        <i class="fas fa-user-secret"></i>
+      </article>
+      <article>
+        <h6>Usurio Protegido</h6>
+        <i class="fas fa-user-shield"></i>
+      </article>
+      <article>
+        <h6>Castillo</h6>
+        <i class="fas fa-vihara"></i>
+      </article>
+      <article>
+        <h6>Volcan</h6>
+        <i class="fas fa-volcano"></i>
+      </article>
+      <article>
+        <h6>Caminar</h6>
+        <i class="fas fa-walking"></i>
+      </article>
+      <article>
+        <h6>Vue.js</h6>
+        <i class="fab fa-vuejs"></i>
+      </article>
+      <article>
+        <h6>Barita</h6>
+        <i class="fas fa-wand"></i>
+      </article>
+      <article>
+        <h6>Barita Magica</h6>
+        <i class="fas fa-wand-magic"></i>
+      </article>
+      <article>
+        <h6>Whapp</h6>
+        <i class="fab fa-whatsapp"></i>
+      </article>
+      <article>
+        <h6>Whapp App</h6>
+        <i class="fab fa-whatsapp-square"></i>
+      </article>
+      <article>
+        <h6>Wifi</h6>
+        <i class="fas fa-wifi"></i>
+      </article>
+      <article>
+        <h6>Wifi - Min</h6>
+        <i class="fas fa-wifi-1"></i>
+      </article>
+      <article>
+        <h6>Wifi - Mid</h6>
+        <i class="fas fa-wifi-2"></i>
+      </article>
+      <article>
+          <h6>Wifi - Non</h6>
+          <i class="fas fa-wifi-slash"></i>
+        </article>
+        <article>
+          <h6>Ying-Yang</h6>
+          <i class="fas fa-yin-yang"></i>
+        </article>
+        <article>
+          <h6>Rad</h6>
+          <i class="far fa-radiation-alt"></i>
+        </article>
+        <article>
+          <h6>Prey</h6>
+          <i class="fas fa-pray"></i>
+        </article>
+        <i class="fas fa-poo-storm"></i>
+        <i class="fas fa-poo"></i>
+        <i class="far fa-plus-hexagon"></i>
+        <i class="fas fa-paw-claws"></i>
+        <i class="fas fa-pastafarianism"></i>
+        <i class="fas fa-omega"></i>
+        <i class="fas fa-mandolin"></i>
+        <i class="fas fa-mace"></i>
+        <i class="fas fa-key-skeleton"></i>
+        <i class="fab fa-jira"></i>
+        <i class="fas fa-infinity"></i>
+        <i class="fas fa-hood-cloak"></i>
+        <i class="fas fa-history"></i>
+        <i class="fas fa-hiking"></i>
+        <i class="fas fa-hexagon"></i>
+        <i class="fas fa-helmet-battle"></i>
+        <i class="fas fa-hat-wizard"></i>
+        <i class="fas fa-hat-witch"></i>
+        <i class="far fa-hamsa"></i>
+        <i class="fas fa-hammer-war"></i>
+        <i class="fas fa-hammer"></i>
+        <i class="far fa-genderless"></i>
+        <i class="far fa-gamepad"></i>
+        <i class="fas fa-flask-poison"></i>
+        <i class="fas fa-eye-evil"></i>
+        <i class="fas fa-eye-slash"></i>
+        <i class="fas fa-eye"></i>
+        <i class="far fa-engine-warning"></i>
+        <i class="fas fa-empty-set"></i>
+        <i class="fas fa-dungeon"></i>
+    </section>
+    
+  </main>
+  random gato <i class="fas fa-cat"></i>
+  <footer>
+    <h5>Tecnologias</h5>
+    <i class="fab fa-css3-alt"></i>
+    <i class="fab fa-js-square"></i>
+    <i class="fab fa-html5"></i>
+    <hr><hr><hr>
+    Deja tu comentario <i class="fas fa-comments"></i>
+    <hr>
+    Encontraste un bug <i class="fas fa-bug"></i>, Avisanos.<i class="fas fa-comment-alt-smile"></i>
+    <i class="far fa-envelope"></i>
+    <br>
+    Comprame una Birra <i class="fas fa-beer"></i>
+  </footer>
+  <script src=""></script>
+</body>
+</html>

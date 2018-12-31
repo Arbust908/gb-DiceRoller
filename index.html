@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>Dice Roller</title>
+  <script defer src="https://pro.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-4Gm0M5DjJ0zGaEtLu0ztNIoHWiuJ5rKiaVlpZKeNqXAW49eIIa2ymxb3C4c3uEXR" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=IM+Fell+English|Roboto+Slab" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <header>
+    <h1>
+      <i class="fas fa-dice fa-lg"></i>
+      Dice Roller
+      <i class="fas fa-dice fa-lg"></i>
+    </h1>
+  </header>
+  <main>
+    <section>
+      <article class="roll-conf drop">
+        <h3>¡Preparar la tirada!</h3>
+        <p>
+          Dado : <i class="far fa-dice-d6"></i> <em>D6</em>
+        </p>
+        <p>
+          Dados: <strong id='cantDados'>#</strong>
+          <button class="btn-alt btn-round" id="lessDados">
+            <i class="fas fa-angle-left"></i>
+          </button>
+          <button class="btn-alt btn-round" id="moreDados">
+            <i class="fas fa-angle-right"></i>
+          </button>
+        </p>
+        <p>
+          Repeticiones: <strong id='cantSets'>#</strong>
+          <button class="btn-alt btn-round" id="lessSets">
+            <i class="fas fa-angle-left"></i>
+          </button>
+          <button class="btn-alt btn-round" id="moreSets">
+            <i class="fas fa-angle-right"></i>
+          </button>
+        </p>
+        <button class="btn-main" id="roll">¡Tirar!</button>
+      </article>
+    </section>
+    <section id="results">
+      <article class="roll-res drop">
+        <h6>Tirada 1</h6>
+        <ul>
+          <li>
+            <i class="fas fa-dice-two"></i>
+          </li>
+        </ul>
+        <table>
+          <tr>
+            <th>Rango</th>
+            <th>Media</th>
+            <th>Mediana</th>
+            <th>Modo</th>
+            <th>Total</th>
+          </tr>
+          <tr>
+            <td>2-2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+            <td>2</td>
+          </tr>
+        </table>
+      </article>
+    </section>
+    <section disabled hidden>
+      <article>
+        Minimo  <i class="fas fa-angle-double-left"></i>
+        Maximo  <i class="fas fa-angle-double-right"></i>
+        menos  <i class="fas fa-angle-left"></i>
+        mas  <i class="fas fa-angle-right"></i>
+        Estadisticas  <i class="fas fa-chart-bar"></i>
+        OK  <i class="fas fa-check-circle"></i>
+        Tirar Dados  <i class="fas fa-dice"></i>
+        D10  <i class="far fa-dice-d10"></i>
+        D12  <i class="far fa-dice-d12"></i>
+        D20  <i class="far fa-dice-d20"></i>
+        D4  <i class="far fa-dice-d4"></i>
+        D6  <i class="far fa-dice-d6"></i>
+        D8  <i class="far fa-dice-d8"></i>
+        5 en D6  <i class="fas fa-dice-five"></i>
+        4 en D6  <i class="fas fa-dice-four"></i>
+        1 en D6  <i class="fas fa-dice-one"></i>
+        6 en D6  <i class="fas fa-dice-six"></i>
+        3 en D6  <i class="fas fa-dice-three"></i>
+        2 en D6  <i class="fas fa-dice-two"></i>
+        Cancelar  <i class="fas fa-times-circle"></i>
+        Off  <i class="far fa-toggle-off"></i>
+        On  <i class="far fa-toggle-on"></i>
+        Borrar  <i class="fas fa-trash-alt"></i>
+        Ying-Yang  <i class="fas fa-yin-yang"></i>
+        Poop  <i class="fas fa-poo"></i>
+        Agregar  <i class="far fa-plus-hexagon"></i>
+        Omega  <i class="fas fa-omega"></i>
+        Infinito  <i class="fas fa-infinity"></i>
+        SinGenero?  <i class="far fa-genderless"></i>
+        Vacio  <i class="fas fa-empty-set"></i>
+      </article>
+    </section>
+    
+  </main>
+  <footer>
+    <section dev>
+      <h5>Tecnologias</h5>
+      <article>
+        <i class="fab fa-html5"></i>
+        <i class="fab fa-css3-alt"></i>
+        <i class="fab fa-js-square"></i>
+      </article>
+    </section>
+    <section disabled hidden dev>
+      Deja tu comentario <i class="fas fa-comments"></i>
+      <!-- Hace falta... Ya va a estar el Chat -->
+    </section>
+    <section dev>
+      Encontraste un bug <i class="fas fa-bug"></i>, Avisanos.
+      <i class="fas fa-comment-alt-smile"></i>
+      <!-- Link a Chat o algo asi -->
+      <i class="far fa-envelope"></i>
+      <!-- Link a Mail -->
+    </section>
+    <section>
+      <h5>¿Te gusto y te sirvio?</h5>
+      <h6>Comprame una Birra <i class="fas fa-beer"></i></h6>
+      <!-- Link a MercadoPago/Paypal? -->
+    </section>
+  </footer>
+  <script src="js/diceBag.js"></script>
+  <script src="js/math.js"></script>
+  <script>
+    window.onload = ()=>{
+      // dadoController
+      let dados = 1;
+      
+      const cantDados = document.querySelector('#cantDados');
+      function updCantDados(ele,cant){
+        // console.log('elemento:',ele);
+        // console.log('valor:',cant);
+        
+        return ele.innerText = cant;
+      }
+      updCantDados(cantDados,dados);
+      const moreDados = document.querySelector('#moreDados');
+      const lessDados = document.querySelector('#lessDados');
+      function modDados(num){
+        // console.log(num);
+        dados += num;
+        // console.log(dados);
+        updCantDados(cantDados,dados);
+        // console.log('actualizado');
+      }
+      function moreModDado(){ modDados(1); }
+      function lessModDado(){ modDados(-1); }
+      moreDados.addEventListener('click',moreModDado);
+      lessDados.addEventListener('click',lessModDado);
+      
+      // setController
+      let sets = 1;
+      
+      const cantSets = document.querySelector('#cantSets');
+      function updCantSets(ele,cant){
+        // console.log('elemento:',ele);
+        // console.log('valor:',cant);
+        
+        return ele.innerText = cant;
+      }
+      updCantSets(cantSets,sets);
+      const moreSets = document.querySelector('#moreSets');
+      const lessSets = document.querySelector('#lessSets');
+      function modSets(num){
+        // console.log(num);
+        sets += num;
+        // console.log(sets);
+        updCantSets(cantSets,sets);
+        // console.log('actualizado');
+      }
+      function moreMod(){ modSets(1); }
+      function lessMod(){ modSets(-1); }
+      moreSets.addEventListener('click',moreMod);
+      lessSets.addEventListener('click',lessMod);
+      
+      // Roller
+      const roll = document.querySelector('#roll');
+      roll.addEventListener('click',tirarDado);
+      
+      function printError(num){
+        const pag = document.querySelector('body');
+        const msg = 
+        `<div class="popUp">
+          La cantidad de dados tiene que ser mas que 0 y es 
+            <strong>${num}</strong>
+        </div>`;
+        pag.appendChild(msg);
+        setTimeout(()=>{
+          pag.removeChild(msg);
+        },3000);
+      }
+      function printStats(obj){
+        let stats = 
+        `<table>
+          <tr>
+            <th>Rango</th>
+            <th>Media</th>
+            <th>Mediana</th>
+            <th>Modo</th>
+            <th>Total</th>
+          </tr>
+          <tr>
+            <td>${ obj.range[0] }-${obj.range[1]}</td>
+            <td>${ (parseFloat(Math.round(obj.mean * 100) / 100).toFixed(2)) }</td>
+            <td>${ obj.median }</td>
+            <td>${ obj.mode }</td>
+            <td>${ obj.total }</td>
+          </tr>
+        </table>
+        `;
+        return stats
+      }
+      function getStats(array) {
+        const roll = {
+          rolls: array,
+          mean: mean(array),
+          median: median(array),
+          mode: mode(array),
+          range: range(array),
+          total: array.reduce((a, b) => a + b, 0)
+        }
+        // console.log(roll);
+        return printStats(roll);
+      }
+      function printResult(array) {
+        console.log(array);
+        
+        function toLeters(num){
+          switch (num) {
+            case 1:
+            return 'one';
+            break;
+            case 2:
+            return 'two';
+            break;
+            case 3:
+            return 'three';
+            break;
+            case 4:
+            return 'four';
+            break;
+            case 5:
+            return 'five';
+            break;
+            case 6:
+            return 'six';
+            break;
+            
+            default: 'one';
+            break;
+          }
+          
+        }
+        const results = document.querySelector('#results');
+        let htmlSet = '';
+        for (let i = 0; i < array.length; i++) {
+          let article = 
+          `<article class="roll-res drop">
+            <h6>Tirada ${i+1} </h6>
+            <ul>`;
+            for (let y = 0; y < array[i].length; y++) {
+              let element = 
+              `<li>
+                <i class="fas fa-dice-${toLeters(array[i][y])}"></i>
+              </li>`;
+              article += element;
+            }
+            article += 
+            `</ul>
+            ${getStats(array[i])}
+            </article>`;
+            htmlSet += article;
+          }
+          results.innerHTML = htmlSet;
+        }
+        function hideRoller() {
+          
+        }
+
+        function tirarDado(){
+          // hideRoller();
+          dados <= 0? printError(dados) : printResult(setRolls(sets,dados,6));
+        }
+      }
+    </script>
+    
+  </body>
+  </html>
