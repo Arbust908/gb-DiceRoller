@@ -21,9 +21,17 @@
     <section>
       <article class="roll-conf drop">
         <h3>¡Preparar la tirada!</h3>
-        <p>
-          Dado : <i class="far fa-dice-d6"></i> <em>D6</em>
-        </p>
+        <span class="fa-stack fa-dice-stak">
+          <i class="fas fa-dice-d4 fa-stack-2x"></i>
+          <i class="far fa-dice-d4 fa-stack-2x"></i>
+        </span> 
+        Dado de <strong id='cantLados'>#</strong>
+        <button class="btn-alt btn-round" id="lessLados" >
+          <i class="fas fa-angle-left"></i>
+        </button>
+        <button class="btn-alt btn-round" id="moreLados">
+          <i class="fas fa-angle-right"></i>
+        </button>
         <p>
           Dados: <strong id='cantDados'>#</strong>
           <button class="btn-alt btn-round" id="lessDados">
@@ -137,55 +145,106 @@
   <script src="js/math.js"></script>
   <script>
     window.onload = ()=>{
-      // dadoController
-      let dados = 1;
-      
-      const cantDados = document.querySelector('#cantDados');
-      function updCantDados(ele,cant){
-        // console.log('elemento:',ele);
-        // console.log('valor:',cant);
-        
+      function updateNums(ele,cant){
         return ele.innerText = cant;
       }
-      updCantDados(cantDados,dados);
-      const moreDados = document.querySelector('#moreDados');
-      const lessDados = document.querySelector('#lessDados');
-      function modDados(num){
-        // console.log(num);
-        dados += num;
-        // console.log(dados);
-        updCantDados(cantDados,dados);
-        // console.log('actualizado');
+      function limits(actual,bot,top){
+        return (actual < bot || actual > top);
       }
-      function moreModDado(){ modDados(1); }
-      function lessModDado(){ modDados(-1); }
-      moreDados.addEventListener('click',moreModDado);
-      lessDados.addEventListener('click',lessModDado);
+      function disabledButton(btn,bool){
+        if(bool){
+          btn.setAttribute('disabled','disabled');
+        } else {
+          btn.removeAttribute('disabled');
+        }
+      }
+      // ladoController
+      const listaDeLados = [4,6,8,10,12,20,100];
+      let lados = listaDeLados[0];
+      
+      const cantLados = document.querySelector('#cantLados');
+      const moreLados = document.querySelector('#moreLados');
+      const lessLados = document.querySelector('#lessLados');
+      
+      function listOffBounds(num) {
+        return limits(num,0,(listaDeLados.length - 1));
+      }
+      function disabledDiceButton(btn,actual,mod){
+        if(listOffBounds(actual+mod)){
+          btn.setAttribute('disabled',true);
+        } else {
+          btn.removeAttribute('disabled');
+        }
+      }
+      disabledDiceButton(moreLados,listaDeLados.indexOf(lados),1);
+      disabledDiceButton(lessLados,listaDeLados.indexOf(lados),-1);
+      
+      function modLados(num){
+        let indexActual = listaDeLados.indexOf(lados);
+        // console.log(indexActual);
+        let newIndex = indexActual + num;
+        // console.log(num);
+        // console.log(listaDeLados[indexActual+num]);
+        // console.log(listOffBounds(newIndex));
+        if (!listOffBounds(newIndex)) {
+          lados = listaDeLados[indexActual+num];
+        }
+        disabledDiceButton(moreLados,listaDeLados.indexOf(lados),1);
+        disabledDiceButton(lessLados,listaDeLados.indexOf(lados),-1);
+        updateNums(cantLados,lados);
+      }
+      updateNums(cantLados,lados);
+      moreLados.addEventListener('click',() =>{modLados( 1)});
+      lessLados.addEventListener('click',() =>{modLados(-1)});
+      
+      
+      // dadoController
+      /**//* ATRIBUTES */
+      /**/let dados = 1;
+      /**/const cantDados = document.querySelector('#cantDados');
+      /**/const moreDados = document.querySelector('#moreDados');
+      /**/const lessDados = document.querySelector('#lessDados');
+      /**//* METHODS */
+      /**/function updtDadosNum() {
+      /**/  disabledButton(moreDados,limits(dados,1,20));
+      /**/  disabledButton(lessDados,limits(dados,2,21));
+      /**/  updateNums(cantDados,dados);
+      /**/}
+      /**/function modDados(num){
+      /**/  // console.log(num);
+      /**/  dados += num;
+      /**/  // console.log(dados);
+      /**/  updtDadosNum();
+      /**/  // console.log('actualizado');
+      /**/}
+      /**//* EXECUTION */
+      /**/updtDadosNum();
+      /**/moreDados.addEventListener('click',()=>{modDados( 1)});
+      /**/lessDados.addEventListener('click',()=>{modDados(-1)});
       
       // setController
-      let sets = 1;
-      
-      const cantSets = document.querySelector('#cantSets');
-      function updCantSets(ele,cant){
-        // console.log('elemento:',ele);
-        // console.log('valor:',cant);
-        
-        return ele.innerText = cant;
-      }
-      updCantSets(cantSets,sets);
-      const moreSets = document.querySelector('#moreSets');
-      const lessSets = document.querySelector('#lessSets');
-      function modSets(num){
-        // console.log(num);
-        sets += num;
-        // console.log(sets);
-        updCantSets(cantSets,sets);
-        // console.log('actualizado');
-      }
-      function moreMod(){ modSets(1); }
-      function lessMod(){ modSets(-1); }
-      moreSets.addEventListener('click',moreMod);
-      lessSets.addEventListener('click',lessMod);
+      /**//* ATRIBUTES */
+      /**/let sets = 1;
+      /**/const cantSets = document.querySelector('#cantSets');
+      /**/const moreSets = document.querySelector('#moreSets');
+      /**/const lessSets = document.querySelector('#lessSets');
+      /**//* METHODS */
+      /**/function updtSetsNum() {
+      /**/  disabledButton(moreSets,limits(sets,1,4));
+      /**/  disabledButton(lessSets,limits(sets,2,5));
+      /**/  updateNums(cantSets,sets);
+      /**/}
+      /**/function modSets(num){
+      /**/  // console.log(num);
+      /**/  sets += num;
+      /**/  // console.log(sets);
+      /**/  updtSetsNum();
+      /**/  // console.log('actualizado');
+      /**/}
+      /**//* EXECUTION */
+      /**/updtSetsNum();
+      /**/moreSets.addEventListener('click',()=>{modSets(1);});
+      /**/lessSets.addEventListener('click',()=>{modSets(-1);});
       
       // Roller
       const roll = document.querySelector('#roll');
@@ -196,7 +255,7 @@
         const msg = 
         `<div class="popUp">
           La cantidad de dados tiene que ser mas que 0 y es 
-            <strong>${num}</strong>
+          <strong>${num}</strong>
         </div>`;
         pag.appendChild(msg);
         setTimeout(()=>{
@@ -237,7 +296,7 @@
         return printStats(roll);
       }
       function printResult(array) {
-        console.log(array);
+        //console.log(array);
         
         function toLeters(num){
           switch (num) {
@@ -272,16 +331,26 @@
           `<article class="roll-res drop">
             <h6>Tirada ${i+1} </h6>
             <ul>`;
-            for (let y = 0; y < array[i].length; y++) {
-              let element = 
-              `<li>
-                <i class="fas fa-dice-${toLeters(array[i][y])}"></i>
-              </li>`;
-              article += element;
-            }
-            article += 
-            `</ul>
-            ${getStats(array[i])}
+              for (let y = 0; y < array[i].length; y++) {
+                const ex = array[i][y];
+                //console.log(ex);
+                let element = "";
+                if (lados >= 6) {
+                  //console.log('mayor');
+                  element = 
+                  `<li><strong>${ex}</strong></li>`;
+                } else {
+                  //console.log('menor');
+                  element = 
+                  `<li>
+                    <i class="fas fa-dice-${toLeters(ex)}"></i>
+                  </li>`;
+                }
+                article += element;
+              }
+              article += 
+              `</ul>
+              ${getStats(array[i])}
             </article>`;
             htmlSet += article;
           }
@@ -290,10 +359,10 @@
         function hideRoller() {
           
         }
-
+        
         function tirarDado(){
           // hideRoller();
-          dados <= 0? printError(dados) : printResult(setRolls(sets,dados,6));
+          dados <= 0? printError(dados) : printResult(setRolls(sets,dados,lados));
         }
       }
     </script>
