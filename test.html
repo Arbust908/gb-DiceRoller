@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>VueRoller</title>
+  <script defer src="https://pro.fontawesome.com/releases/v5.6.3/js/all.js" integrity="sha384-4Gm0M5DjJ0zGaEtLu0ztNIoHWiuJ5rKiaVlpZKeNqXAW49eIIa2ymxb3C4c3uEXR" crossorigin="anonymous"></script>
+  <link href="https://fonts.googleapis.com/css?family=IM+Fell+English|Roboto+Slab" rel="stylesheet">
+  <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+  <div id="vue">
+    <header>
+      <h1 v-text='titulo'></h1>
+    </header>
+    <main>
+      <section style="flex-direction:column">
+        <article class="roll-conf">
+          <h4>{{ titulo + descripcion }}</h4>
+          <label for="sides">Selecciona Dado</label>
+          <section class="die-selector">
+            <!-- Deberian ser Componentes -->
+            <button @click='selectDie' class="die" data-sides="4" selected>
+              <i class="far fa-dice-d4" ></i>
+            </button>
+            <button @click='selectDie' class="die" data-sides="6">
+              <i class="far fa-dice-d6" ></i>
+            </button>
+            <button @click='selectDie' class="die" data-sides="8">
+              <i class="far fa-dice-d8" ></i>
+            </button>
+            <button @click='selectDie' class="die" data-sides="10">
+              <i class="far fa-dice-d10" ></i>
+            </button>
+            <button @click='selectDie' class="die" data-sides="12">
+              <i class="far fa-dice-d12" ></i>
+            </button>
+            <button @click='selectDie' class="die" data-sides="20">
+              <i class="far fa-dice-d20" ></i>
+            </button>
+            <!-- <button @click='selectDie' class="die" data-sides="100">
+              <div>
+                <i class="far fa-dice-d10" ></i>
+                <i class="far fa-dice-d10" ></i>
+              </div>
+            </button> -->
+          </section>
+          <input type="number" name="sides"v-model='lados'>
+          <hr>
+          <label for="sides">Cantidad de Dados</label>
+          <input type="number" name="sides"v-model='cantidad'>
+          <hr>
+          <label for="sides">Cantidad de Sets de tiradas</label>
+          <input type="number" name="sides"v-model='sets'>
+          <hr>
+          <button @click='tirar'>Tirar</button>
+        </article>
+        <article v-if='resultado'>
+          Estadisticas de los sets
+          <button @click='toggleStats' id="toggler">Toggle</button>
+          <article v-if='statShown' class="roll-res">
+            <table>
+              <tr>
+                <th>Rango</th>
+                <th>Media</th>
+                <th>Mediana</th>
+                <th>Modo</th>
+                <th>Total</th>
+              </tr>
+              <tr>
+                <td> {{resultado.range}} </td>
+                <td> {{resultado.mean}} </td>
+                <td> {{resultado.median}} </td>
+                <td> {{resultado.mode}} </td>
+                <td> {{resultado.total}} </td>
+              </tr>
+            </table>
+            
+          </article>
+          <article class="roll-res drop" v-for="(set, index) in resultado.sets">
+            <h6>Tirada {{index+1}}
+            </h6>
+            <ul>
+              <li v-for='roll in set.rolls'>
+                {{ roll }}
+              </li>
+            </ul>
+            <table>
+              <tr>
+                <th>Rango</th>
+                <th>Media</th>
+                <th>Mediana</th>
+                <th>Modo</th>
+                <th>Total</th>
+              </tr>
+              <tr>
+                <td> {{set.range}} </td>
+                <td> {{set.mean}} </td>
+                <td> {{set.median}} </td>
+                <td> {{set.mode}} </td>
+                <td> {{set.total}} </td>
+              </tr>
+            </table>
+          </article>
+        </article>
+      </section>
+    </main>
+  </div>
+  <!-- development version, includes helpful console warnings -->
+  <script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+  <script src="js/diceBag.js"></script>
+  <script>
+    const main = document.querySelector('main');
+    console.log(groupDiceRoll(6,5));
+    console.log(setDiceRoll(6,5,4));
+    // --- *** --- //
+    new Vue({
+      el: '#vue',
+      data: {
+        titulo: 'Dice Roller',
+        descripcion : ' es un programa que lanza dados por nosotros.',
+        lados: 6,
+        cantidad: 1,
+        sets: 1,
+        resultado: false,
+        statShown: false
+      },
+      methods: {
+        tirar(){
+          this.resultado = setDiceRoll(this.lados,this.cantidad,this.sets)
+          console.log(this.resultado);
+        },
+        toggleStats(){
+          this.statShown = !this.statShown;
+        },
+        selectDie(event){
+          const parentEle = event.target.parentElement;
+          console.log(event.target);
+          console.log(parentEle);
+          console.log(parentEle.dataset.sides);
+          console.log('Is Selected:',parentEle.getAttribute('selected'));
+          if(parentEle.getAttribute('selected')){
+
+          } else {
+            parentEle.setAttribute('selected',true);
+            this.lados = parentEle.dataset.sides;
+          }
+        }
+      },
+    })
+  </script>
+</body>
+</html>
